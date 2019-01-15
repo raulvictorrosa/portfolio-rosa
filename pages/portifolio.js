@@ -1,6 +1,7 @@
 import axios from "axios";
 import { withRouter } from "next/router";
 import { Component } from "react";
+import BasePage from "../components/BasePage";
 import BaseLayout from "../components/layouts/BaseLayout";
 
 class Portifolio extends Component {
@@ -13,6 +14,7 @@ class Portifolio extends Component {
       );
       portifolio = res.data;
     } catch (error) {
+      // portifolio = error;
       console.error(error);
     }
     return { portifolio };
@@ -22,10 +24,12 @@ class Portifolio extends Component {
     const { portifolio } = this.props;
 
     return (
-      <BaseLayout>
-        <h1>{portifolio.title}</h1>
-        <p>{portifolio.body}</p>
-        <p>{portifolio.id}</p>
+      <BaseLayout {...this.props.auth}>
+        <BasePage>
+          <h1>{portifolio.title}</h1>
+          <p>{portifolio.body}</p>
+          <p>{portifolio.id}</p>
+        </BasePage>
       </BaseLayout>
     );
   }

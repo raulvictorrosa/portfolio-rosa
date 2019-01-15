@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Component } from "react";
+import BasePage from "../components/BasePage";
 import BaseLayout from "../components/layouts/BaseLayout";
 import { Link } from "../routes";
 
@@ -32,9 +33,11 @@ class Portifolio extends Component {
     const { posts } = this.props;
     // console.log(this.props);
     return (
-      <BaseLayout>
-        <h1>I am Portifolio Page</h1>
-        <ul>{this.renderPosts(posts)}</ul>
+      <BaseLayout {...this.props.auth}>
+        <BasePage>
+          <h1>I am Portifolio Page</h1>
+          <ul>{this.renderPosts(posts)}</ul>
+        </BasePage>
       </BaseLayout>
     );
   }
