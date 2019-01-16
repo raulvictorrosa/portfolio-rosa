@@ -1,4 +1,5 @@
 import auth0 from "auth0-js";
+import axios from "axios";
 import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
 
@@ -55,14 +56,37 @@ class Auth0 {
     this.auth0.authorize();
   }
 
-  verifyToken(token) {
-    if (token) {
-      const decodedToken = jwt.decode(token);
-      const expiresAt = decodedToken.exp * 1000;
+  async getJWKS() {
+    const res = await axios.get(
+      "https://raulvictorrosa.auth0.com/.well-known/jwks.json"
+    );
+    const jwks = res.data;
+    return jwqs;
+  }
 
-      return decodedToken && new Date().getTime() < expiresAt
-        ? decodedToken
-        : undefined;
+  async verifyToken(token) {
+    if (token) {
+      const decodedToken = jwt.decode(token, { complete: true });
+      const jwks = await this.getJWKS();
+      const jwk = jwks.key[0];
+      // BUILD CERTIFICATE
+      let cert = jwk.x5c[0];
+      cert = cert.match(/.{1,64}/g).join("\n");
+      cert = `-----BRGIN CERTIFICATE-----\n${cert}-----END CERTIFICATE-----\n`;
+      //
+
+      if (jwk.kid === decodedToken.header.kid) {
+        try {
+          const verifiedToken = jwt.verify(token, cert);
+          const expiresAt = verifiedToken.exp * 1000;
+
+          return verifiedToken && new Date().getTime() < expiresAt
+            ? verifiedToken
+            : undefined;
+        } catch (err) {
+          return undefined;
+        }
+      }
     }
 
     return undefined;
