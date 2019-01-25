@@ -8,10 +8,6 @@ class Secret extends Component {
   static async getInitialProps({ req }) {
     const anotherSecretData = await getSecretData(req);
 
-    // const anotherSecretData = process.browser
-    //   ? await getSecretData()
-    //   : await getSecretDataServer(req);
-
     return { anotherSecretData };
   }
 
