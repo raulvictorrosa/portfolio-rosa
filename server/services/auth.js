@@ -3,7 +3,7 @@ const jwksRsa = require("jwks-rsa");
 
 // MIDDLEWARE
 exports.checkJWT = jwt({
-  secret: jwksRsa({
+  secret: jwksRsa.expressJwtSecret({
     cache: true,
     rateLimit: true,
     jwksRequestsPerMinute: 15,
@@ -11,6 +11,6 @@ exports.checkJWT = jwt({
   }),
 
   audience: "mnTg7fHPDymU2fMuujkaBavVg1lOmg7k",
-  issuer: "http://raulvictorrosa.auth0.com",
+  issuer: "https://raulvictorrosa.auth0.com/",
   algorithms: ["RS256"]
 });
