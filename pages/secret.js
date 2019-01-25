@@ -1,5 +1,5 @@
-import axios from "axios";
 import { Component } from "react";
+import { getSecretData } from "../actions";
 import BasePage from "../components/BasePage";
 import withAuth from "../components/hoc/withAuth";
 import BaseLayout from "../components/layouts/BaseLayout";
@@ -20,8 +20,7 @@ class Secret extends Component {
   state = { secretData: [] };
 
   async componentDidMount() {
-    const res = await axios.get("/api/v1/secret");
-    const secretData = res.data;
+    const secretData = await getSecretData();
 
     this.setState({
       secretData
