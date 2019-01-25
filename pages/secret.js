@@ -5,10 +5,14 @@ import withAuth from "../components/hoc/withAuth";
 import BaseLayout from "../components/layouts/BaseLayout";
 
 class Secret extends Component {
-  static getInitialProps() {
-    const superSecretValue = "Super Secret Value";
+  static async getInitialProps({ req }) {
+    const anotherSecretData = await getSecretData(req);
 
-    return { superSecretValue };
+    // const anotherSecretData = process.browser
+    //   ? await getSecretData()
+    //   : await getSecretDataServer(req);
+
+    return { anotherSecretData };
   }
 
   // constructor() {
@@ -29,7 +33,6 @@ class Secret extends Component {
 
   displaySecretData() {
     const { secretData } = this.state;
-    // debugger;
 
     if (secretData && secretData.length > 0) {
       return secretData.map((data, index) => {
