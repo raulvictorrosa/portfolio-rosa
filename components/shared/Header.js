@@ -56,11 +56,11 @@ export default class Header extends React.Component {
   }
 
   render() {
-    const { isAuthenticated } = this.props;
+    const { isAuthenticated, user, className } = this.props;
     return (
       <div>
         <Navbar
-          className="port-navbar port-default position-absolute"
+          className={`port-navbar port-nav-base position-absolute ${className}`}
           color="transparent"
           dark
           expand="md"

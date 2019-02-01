@@ -34,8 +34,7 @@ class Portifolio extends Component {
     // console.log(this.props);
     return (
       <BaseLayout {...this.props.auth}>
-        <BasePage>
-          <h1>I am Portifolio Page</h1>
+        <BasePage title="Portifolio">
           <ul>{this.renderPosts(posts)}</ul>
         </BasePage>
       </BaseLayout>
