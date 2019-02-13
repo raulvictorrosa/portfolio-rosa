@@ -10,21 +10,11 @@ export default class PortifolioCreateForm extends Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleChangeDescription = this.handleChangeDescription.bind(this);
-    this.handleChangeLanguage = this.handleChangeLanguage.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
-    this.setState({ title: event.target.value });
-  }
-
-  handleChangeDescription(event) {
-    this.setState({ description: event.target.value });
-  }
-
-  handleChangeLanguage(event) {
-    this.setState({ language: event.target.value });
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   handleSubmit(event) {
@@ -45,6 +35,7 @@ export default class PortifolioCreateForm extends Component {
         <label>
           Name:
           <input
+            name="title"
             type="text"
             value={this.state.title}
             onChange={this.handleChange}
@@ -53,15 +44,17 @@ export default class PortifolioCreateForm extends Component {
         <label>
           Essay:
           <textarea
+            name="description"
             value={this.state.description}
-            onChange={this.handleChangeDescription}
+            onChange={this.handleChange}
           />
         </label>
         <label>
           Pick your favorite language:
           <select
+            name="language"
             value={this.state.language}
-            onChange={this.handleChangeLanguage}
+            onChange={this.handleChange}
           >
             <option value="javascript">JavaScript</option>
             <option value="java">Java</option>
