@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { Col, Row } from "reactstrap";
 import BasePage from "../components/BasePage";
 import withAuth from "../components/hoc/withAuth";
 import BaseLayout from "../components/layouts/BaseLayout";
@@ -12,7 +13,11 @@ class PortifolioNew extends Component {
           className="portifolio-create-page"
           title="Create new Portifolio"
         >
-          <PortifolioCreateForm />
+          <Row>
+            <Col md="6">
+              <PortifolioCreateForm />
+            </Col>
+          </Row>
         </BasePage>
       </BaseLayout>
     );
