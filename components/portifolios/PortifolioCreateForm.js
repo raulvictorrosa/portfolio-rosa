@@ -3,13 +3,16 @@ import React from "react";
 import { FormGroup } from "reactstrap";
 import PortInput from "../form/PortInput";
 
-const validateInputs = validate => {
+const validateInputs = values => {
   let errors = {};
-  // if (!validate.email) {
-  //   errors.email = "Required";
-  // } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(validate.email)) {
-  //   errors.email = "Invalid email address";
-  // }
+
+  Object.entries(values).forEach(([key, value]) => {
+    debugger;
+    if (!values[key]) {
+      errors[key] = `Field ${key} is required!!!`;
+    }
+  });
+
   return errors;
 };
 
