@@ -16,6 +16,13 @@ const validateInputs = values => {
     }
   });
 
+  const startDate = values.startDate;
+  const endDate = values.endDate;
+
+  if (startDate && endDate && endDate.isBefore(startDate)) {
+    errors.endDate = "End Date cannot be before start date!!!";
+  }
+
   return errors;
 };
 
