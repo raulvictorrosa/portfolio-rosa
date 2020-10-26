@@ -1,21 +1,26 @@
-import axios from "axios";
-import Cookies from "js-cookie";
-import { getCookieFromReq } from "../helpers/utils";
+import { useEffect, useState } from 'react'
 
-const setAuthHeader = req => {
-  const token = req ? getCookieFromReq(req, "jwt") : Cookies.getJSON("jwt");
+export const useGetData = (url) => {
+  const [data, setData] = useState([])
+  const [error, setError] = useState()
+  const [loading, setLoading] = useState(true)
 
-  if (token) {
-    return { headers: { Authorization: `Bearer ${token}` } };
-  } else {
-    return undefined;
-  }
-};
+  useEffect(() => {
+    async function fetchData() {
+      const res = await fetch(url)
+      const result = await res.json()
 
-export const getSecretData = async req => {
-  const url = "http://localhost:3000/api/v1/secret";
+      if (res.status !== 200) {
+        setError(result)
+      } else {
+        setData(result)
+      }
 
-  return await axios
-    .get(url, setAuthHeader(req))
-    .then(response => response.data);
-};
+      setLoading(false)
+    }
+
+    fetchData()
+  }, [])
+
+  return { data, error, loading }
+}
