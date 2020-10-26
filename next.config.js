@@ -1,4 +1,9 @@
-const withCSS = require("@zeit/next-css");
-const withSass = require("@zeit/next-sass");
+const path = require('path')
 
-module.exports = withCSS(withSass());
+module.exports = {
+  pageExtensions: ['tsx', 'ts', 'jsx', 'js'],
+  webpack: (config) => {
+    config.resolve.alias['@'] = path.resolve(__dirname)
+    return config
+  }
+}
