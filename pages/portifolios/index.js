@@ -50,8 +50,8 @@ const Portifolio = () => {
       <BasePage className="portfolio-page" title="Portifolio">
         <Row>
           {loading && <p>Loading data...</p>}
-          {data && renderPosts(data)}
           {error && <div className="alert alert-danger">{error.message}</div>}
+          {data && renderPosts(data)}
         </Row>
       </BasePage>
     </BaseLayout>
