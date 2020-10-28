@@ -1,5 +1,5 @@
 // import Link from 'next/link'
-import { useGetData } from '@/actions'
+import { useGetPosts } from '@/actions'
 import BasePage from '@/components/BasePage'
 import BaseLayout from '@/components/layouts/BaseLayout'
 import { Fragment } from 'react'
@@ -14,7 +14,7 @@ import {
 } from 'reactstrap'
 
 const Portifolio = () => {
-  const { data, error, loading } = useGetData('/api/v1/posts')
+  const { data, error, loading } = useGetPosts()
 
   const renderPosts = (posts) =>
     posts.map((post, index) => (
@@ -45,11 +45,12 @@ const Portifolio = () => {
       </Col>
     ))
 
+  // console.log(loading)
   return (
     <BaseLayout>
       <BasePage className="portfolio-page" title="Portifolio">
         <Row>
-          {loading && <p>Loading data...</p>}
+          {loading === true && <p>Loading data...</p>}
           {error && <div className="alert alert-danger">{error.message}</div>}
           {data && renderPosts(data)}
         </Row>
