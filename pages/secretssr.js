@@ -1,7 +1,6 @@
 import BasePage from '@/components/BasePage'
 import BaseLayout from '@/components/layouts/BaseLayout'
 import { withAuth } from '@/utils/auth0'
-// import { authorizedUser, withAuth } from '@/utils/auth0'
 
 const SecretSSR = ({ user, title }) => {
   return (
@@ -14,12 +13,6 @@ const SecretSSR = ({ user, title }) => {
     </BaseLayout>
   )
 }
-
-// export const getServerSideProps = async ({ req, res }) => {
-//   const user = await authorizedUser(req, res)
-
-//   return { props: { user } }
-// }
 
 const getTitle = () => {
   return new Promise((res) => {
