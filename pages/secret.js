@@ -13,4 +13,4 @@ const Secret = ({ user, loading }) => {
   )
 }
 
-export default withAuth(Secret)
+export default withAuth(Secret)()
