@@ -18,15 +18,12 @@ const BsNavBrand = (props) => (
 )
 
 const LoginLink = () => (
-  // <span className="nav-link port-navbar-link clickable">Login</span>
   <a className="nav-link port-navbar-link" href="/api/v1/login">
     Login
   </a>
-  // <BsNavLink href="/api/v1/login" title="Login" />
 )
 
 const LogoutLink = () => (
-  // <span className="nav-link port-navbar-link clickable">Logout</span>
   <a className="nav-link port-navbar-link" href="/api/v1/logout">
     Logout
   </a>
@@ -64,12 +61,18 @@ const Header = ({ user, loading }) => {
             <NavItem className="port-navbar-item">
               <BsNavLink href="/cv" title="CV" />
             </NavItem>
-            <NavItem className="port-navbar-item">
+            {/* <NavItem className="port-navbar-item">
               <BsNavLink href="/secret" title="Secret" />
             </NavItem>
             <NavItem className="port-navbar-item">
               <BsNavLink href="/secretssr" title="SecretSSR" />
             </NavItem>
+            <NavItem className="port-navbar-item">
+              <BsNavLink href="/onlyadmin" title="Admin" />
+            </NavItem>
+            <NavItem className="port-navbar-item">
+              <BsNavLink href="/onlyadminssr" title="AdminSSR" />
+            </NavItem> */}
           </Nav>
           <Nav navbar>
             {!loading && (
