@@ -1,7 +1,7 @@
-// import Link from 'next/link'
-import { useGetPosts } from '@/actions'
+import { useGetUser } from '@/actions/user'
 import BasePage from '@/components/BasePage'
 import BaseLayout from '@/components/layouts/BaseLayout'
+import PortfolioApi from '@/lib/api/portfolios'
 import { Fragment } from 'react'
 import {
   Card,
@@ -13,50 +13,58 @@ import {
   Row
 } from 'reactstrap'
 
-const Portifolio = () => {
-  const { data, error, loading } = useGetPosts()
+const Portfolios = ({ portfolios }) => {
+  const { data: dataU, loading: loadingU } = useGetUser()
 
-  const renderPosts = (posts) =>
-    posts.map((post, index) => (
-      <Col md="4" key={index}>
-        {/* <Link as={`/portifolios/${post.id}`} href="/portifolios/[id]"> */}
-        {/* <a> */}
-        <Fragment key={index}>
+  const renderPortfolios = (portfolios) =>
+    portfolios.map((portfolio) => (
+      <Col md="4" key={portfolio._id}>
+        <Fragment key={portfolio._id}>
           <span>
             <Card className="portfolio-card">
               <CardHeader className="portfolio-card-header">
-                Some Position {index}
+                Some Position
               </CardHeader>
               <CardBody>
-                <p className="portfolio-card-city"> Some Location {index} </p>
+                <p className="portfolio-card-city">Some Location</p>
                 <CardTitle className="portfolio-card-title">
-                  Some Company {index}
+                  Some Company
                 </CardTitle>
                 <CardText className="portfolio-card-text">
-                  Some Description {index}
+                  Some Description
                 </CardText>
                 <div className="readMore"> </div>
               </CardBody>
             </Card>
           </span>
         </Fragment>
-        {/* </a> */}
-        {/* </Link> */}
       </Col>
     ))
 
-  // console.log(loading)
   return (
-    <BaseLayout>
+    <BaseLayout user={dataU} loading={loadingU}>
       <BasePage className="portfolio-page" title="Portifolio">
         <Row>
-          {loading === true && <p>Loading data...</p>}
-          {error && <div className="alert alert-danger">{error.message}</div>}
-          {data && renderPosts(data)}
+          {/* {loading === true && <p>Loading data...</p>}
+          {error && <div className="alert alert-danger">{error.message}</div>} */}
+          {portfolios && renderPortfolios(portfolios)}
         </Row>
       </BasePage>
     </BaseLayout>
   )
 }
 
-export default Portifolio
+// This function is called during the build time
+// Improved performance of page
+// It will create static page with dynamic data
+export async function getStaticProps() {
+  const json = await new PortfolioApi().getAll()
+  const portfolios = json.data
+  return {
+    props: {
+      portfolios
+    }
+  }
+}
+
+export default Portfolios
