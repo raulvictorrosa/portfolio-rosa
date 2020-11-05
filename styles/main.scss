@@ -1,14 +1,18 @@
-@import "./shared/fonts";
-@import "./shared/colors";
-@import "./index";
-@import "./header";
-@import "./portifolios";
+@import './shared/fonts';
+@import './shared/colors';
+
+// Components
+@import './components/header';
+
+// Pages
+@import './index';
+@import './portfolios';
 
 html,
 body {
   height: 100%;
   width: 100%;
-  font-family: "Montserrat", "Helvetica", sans-serif;
+  font-family: 'Montserrat', 'Helvetica', sans-serif;
 }
 
 .clickable {
@@ -22,15 +26,16 @@ body {
   color: white;
 }
 
-.error {
-  font-weight: 700;
-  color: red;
-}
+// .error {
+//   font-weight: 700;
+//   color: red;
+// }
 
 .base-page {
   padding-top: 150px;
-  color: black;
-  background-color: #ecedee;
+  // color: black;
+  color: white;
+  // background-color: #ecedee;
   min-height: 100vh;
 
   .page-header {
