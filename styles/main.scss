@@ -33,14 +33,13 @@ body {
 
 .base-page {
   padding-top: 150px;
-  // color: black;
-  color: white;
-  // background-color: #ecedee;
+  color: black;
+  background-color: #ecedee;
   min-height: 100vh;
 
   .page-header {
     .page-header-title {
-      font-weight: 700;
+      // font-weight: 700;
       color: black;
       display: inline-block;
       margin-bottom: 20px;
