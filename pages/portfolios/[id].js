@@ -3,20 +3,20 @@ import BasePage from '@/components/BasePage'
 import BaseLayout from '@/components/layouts/BaseLayout'
 import { useRouter } from 'next/router'
 
-const Portifolio = () => {
+const Portfolio = () => {
   const router = useRouter()
-  const { data: portifolio, error, loading } = useGetPostById(router.query.id)
+  const { data: portfolio, error, loading } = useGetPostById(router.query.id)
 
   return (
     <BaseLayout>
       <BasePage>
         {loading && <p>Loading Data...</p>}
         {error && <div className="alert alert-danger">{error.message}</div>}
-        {portifolio && (
+        {portfolio && (
           <>
-            <h1>{portifolio.title}</h1>
-            <p>{portifolio.body}</p>
-            <p>{portifolio.id}</p>
+            <h1>{portfolio.title}</h1>
+            <p>{portfolio.body}</p>
+            <p>{portfolio.id}</p>
           </>
         )}
       </BasePage>
@@ -24,4 +24,4 @@ const Portifolio = () => {
   )
 }
 
-export default Portifolio
+export default Portfolio

@@ -1,4 +1,4 @@
-# portifolio-rosa
+# portfolio-rosa
 
 ### 1. Run `yarn install` to install all of the dependencies
 
