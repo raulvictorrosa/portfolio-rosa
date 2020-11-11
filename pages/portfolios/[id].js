@@ -1,27 +1,22 @@
-import { useGetPostById } from '@/actions'
+import { useGetUser } from '@/actions/user'
 import BasePage from '@/components/BasePage'
 import BaseLayout from '@/components/layouts/BaseLayout'
-import { useRouter } from 'next/router'
+import PortfolioApi from '@/lib/api/portfolios'
 
-const Portfolio = () => {
-  const router = useRouter()
-  const { data: portfolio, error, loading } = useGetPostById(router.query.id)
+const Portfolio = ({ portfolio }) => {
+  const { data: dataU, loading: loadingU } = useGetUser()
 
   return (
-    <BaseLayout>
-      <BasePage>
-        {loading && <p>Loading Data...</p>}
-        {error && <div className="alert alert-danger">{error.message}</div>}
-        {portfolio && (
-          <>
-            <h1>{portfolio.title}</h1>
-            <p>{portfolio.body}</p>
-            <p>{portfolio.id}</p>
-          </>
-        )}
-      </BasePage>
+    <BaseLayout user={dataU} loading={loadingU}>
+      <BasePage title="Potfolio Detail">{JSON.stringify(portfolio)}</BasePage>
     </BaseLayout>
   )
+}
+
+export async function getServerSideProps({ query }) {
+  const json = await new PortfolioApi().getById(query.id)
+  const portfolio = json.data
+  return { props: { portfolio } }
 }
 
 export default Portfolio
