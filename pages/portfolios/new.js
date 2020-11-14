@@ -8,16 +8,12 @@ import { Col, Row } from 'reactstrap'
 const PortfolioNew = ({ user, loading: userLoading }) => {
   const [createPortfolio, { data, loading, error }] = useCreatePortfolio()
 
-  const _createPortfolio = (data) => {
-    createPortfolio(data)
-  }
-
   return (
     <BaseLayout user={user} loading={userLoading}>
       <BasePage className="portifolio-create-page" title="Create Portifolio">
         <Row>
           <Col md="8">
-            <PortfolioForm onSubmit={_createPortfolio} />
+            <PortfolioForm onSubmit={createPortfolio} />
           </Col>
         </Row>
       </BasePage>
