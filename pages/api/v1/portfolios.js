@@ -7,6 +7,6 @@ export default async function createPortfolio(req, res) {
     const json = await new PortfolioApi(accessToken).createPortfolio(req.body)
     return res.json(json.data)
   } catch (error) {
-    return res.status(error.status || 400).end(error.message)
+    return res.status(error.status || 422).json(error.response.data)
   }
 }
