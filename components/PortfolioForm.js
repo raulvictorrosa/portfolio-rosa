@@ -22,11 +22,17 @@ const PortfolioForm = ({ onSubmit }) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="form-group">
         <label htmlFor="title">Title</label>
-        <input name="title" type="text" className="form-control" id="title" />
+        <input
+          ref={register}
+          name="title"
+          type="text"
+          className="form-control"
+          id="title"
+        />
       </div>
 
       <div className="form-group">
-        <label htmlFor="city">Company</label>
+        <label htmlFor="company">Company</label>
         <input
           ref={register}
           name="company"
@@ -37,18 +43,18 @@ const PortfolioForm = ({ onSubmit }) => {
       </div>
 
       <div className="form-group">
-        <label htmlFor="city">Company Website</label>
+        <label htmlFor="companyWebSite">Company Website</label>
         <input
           ref={register}
-          name="companyWebsite"
+          name="companyWebSite"
           type="text"
           className="form-control"
-          id="companyWebsite"
+          id="companyWebSite"
         />
       </div>
 
       <div className="form-group">
-        <label htmlFor="street">Location</label>
+        <label htmlFor="location">Location</label>
         <input
           ref={register}
           name="location"
@@ -59,7 +65,7 @@ const PortfolioForm = ({ onSubmit }) => {
       </div>
 
       <div className="form-group">
-        <label htmlFor="street">Job Title</label>
+        <label htmlFor="jobTitle">Job Title</label>
         <input
           ref={register}
           name="jobTitle"
