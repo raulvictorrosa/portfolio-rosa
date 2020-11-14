@@ -1,4 +1,4 @@
-import PortfolioApi from '@/lib/api/portifolios'
+import PortfolioApi from '@/lib/api/portfolios'
 
 export default async function createPortfolio(req, res) {
   try {
