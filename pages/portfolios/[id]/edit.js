@@ -1,8 +1,10 @@
 import { useGetPortfolio } from '@/actions/portfolios'
 import BasePage from '@/components/BasePage'
 import BaseLayout from '@/components/layouts/BaseLayout'
+import PortfolioForm from '@/components/PortfolioForm'
 import withAuth from '@/hoc/withAuth'
 import { useRouter } from 'next/router'
+import { Col, Row } from 'reactstrap'
 
 const PortfolioEdit = ({ user }) => {
   const router = useRouter()
@@ -10,7 +12,18 @@ const PortfolioEdit = ({ user }) => {
 
   return (
     <BaseLayout user={user} loading={false}>
-      <BasePage title="Potfolio Edit"></BasePage>
+      <BasePage title="Potfolio Edit">
+        <Row>
+          <Col md="8">
+            {data && (
+              <PortfolioForm
+                onSubmit={(data) => alert(JSON.stringify(data))}
+                initialData={data}
+              />
+            )}
+          </Col>
+        </Row>
+      </BasePage>
     </BaseLayout>
   )
 }
