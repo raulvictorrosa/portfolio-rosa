@@ -1,3 +1,4 @@
+import { useDeletePortfolio } from '@/actions/portfolios'
 import { useGetUser } from '@/actions/user'
 import BasePage from '@/components/BasePage'
 import BaseLayout from '@/components/layouts/BaseLayout'
@@ -9,7 +10,16 @@ import PortfolioCard from '../../components/PortfolioCard'
 
 const Portfolios = ({ portfolios }) => {
   const router = useRouter()
+  const [deletePortfolio, { data, error }] = useDeletePortfolio()
   const { data: dataU, loading: loadingU } = useGetUser()
+
+  const _deletePortfolio = async (e, portfolioId) => {
+    e.stopPropagation()
+    const isConfirm = confirm('Are you sure want to delete this portfolio?')
+    if (isConfirm) {
+      await deletePortfolio(portfolioId)
+    }
+  }
 
   return (
     <BaseLayout user={dataU} loading={loadingU}>
@@ -39,7 +49,12 @@ const Portfolios = ({ portfolios }) => {
                     >
                       Edit
                     </Button>
-                    <Button color="danger">Delete</Button>
+                    <Button
+                      onClick={(e) => _deletePortfolio(e, portfolio._id)}
+                      color="danger"
+                    >
+                      Delete
+                    </Button>
                   </>
                 )}
               </PortfolioCard>
