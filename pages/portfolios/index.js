@@ -2,8 +2,9 @@ import { useGetUser } from '@/actions/user'
 import BasePage from '@/components/BasePage'
 import BaseLayout from '@/components/layouts/BaseLayout'
 import PortfolioApi from '@/lib/api/portfolios'
+import { isAuthorized } from '@/utils/auth0'
 import { useRouter } from 'next/router'
-import { Col, Row } from 'reactstrap'
+import { Button, Col, Row } from 'reactstrap'
 import PortfolioCard from '../../components/PortfolioCard'
 
 const Portfolios = ({ portfolios }) => {
@@ -19,10 +20,29 @@ const Portfolios = ({ portfolios }) => {
               key={portfolio._id}
               md="4"
               onClick={() => {
-                router.push('/portfolios/[id]', `portfolios/${portfolio._id}`)
+                router.push('/portfolios/[id]', `/portfolios/${portfolio._id}`)
               }}
             >
-              <PortfolioCard portfolio={portfolio} />
+              <PortfolioCard portfolio={portfolio}>
+                {dataU && isAuthorized(dataU, 'admin') && (
+                  <>
+                    <Button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        router.push(
+                          '/portfolios/[id]/edit',
+                          `/portfolios/${portfolio._id}/edit`
+                        )
+                      }}
+                      className="mr-2"
+                      color="warning"
+                    >
+                      Edit
+                    </Button>
+                    <Button color="danger">Delete</Button>
+                  </>
+                )}
+              </PortfolioCard>
             </Col>
           ))}
         </Row>
