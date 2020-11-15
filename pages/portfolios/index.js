@@ -5,11 +5,13 @@ import BaseLayout from '@/components/layouts/BaseLayout'
 import PortfolioApi from '@/lib/api/portfolios'
 import { isAuthorized } from '@/utils/auth0'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 import { Button, Col, Row } from 'reactstrap'
 import PortfolioCard from '../../components/PortfolioCard'
 
-const Portfolios = ({ portfolios }) => {
+const Portfolios = ({ portfolios: initialPortfolios }) => {
   const router = useRouter()
+  const [portfolios, setPortfolios] = useState(initialPortfolios)
   const [deletePortfolio, { data, error }] = useDeletePortfolio()
   const { data: dataU, loading: loadingU } = useGetUser()
 
@@ -18,6 +20,7 @@ const Portfolios = ({ portfolios }) => {
     const isConfirm = confirm('Are you sure want to delete this portfolio?')
     if (isConfirm) {
       await deletePortfolio(portfolioId)
+      setPortfolios(portfolios.filter((p) => p._id !== portfolioId))
     }
   }
 
