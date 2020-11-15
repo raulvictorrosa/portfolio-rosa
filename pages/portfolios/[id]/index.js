@@ -1,7 +1,7 @@
-import { useGetUser } from '@/actions/user'
-import BasePage from '@/components/BasePage'
-import BaseLayout from '@/components/layouts/BaseLayout'
-import PortfolioApi from '@/lib/api/portfolios'
+import { useGetUser } from 'actions/user'
+import BasePage from 'components/BasePage'
+import BaseLayout from 'components/layouts/BaseLayout'
+import PortfolioApi from 'lib/api/portfolios'
 
 const Portfolio = ({ portfolio }) => {
   const { data: dataU, loading: loadingU } = useGetUser()

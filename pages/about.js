@@ -1,6 +1,6 @@
-import { useGetUser } from '@/actions/user'
-import BasePage from '@/components/BasePage'
-import BaseLayout from '@/components/layouts/BaseLayout'
+import { useGetUser } from 'actions/user'
+import BasePage from 'components/BasePage'
+import BaseLayout from 'components/layouts/BaseLayout'
 
 const About = () => {
   const { data, loading } = useGetUser()

@@ -1,4 +1,4 @@
-import { fetcher, useApiHandler } from '@/actions'
+import { fetcher, useApiHandler } from 'actions'
 import axios from 'axios'
 import useSWR from 'swr'
 

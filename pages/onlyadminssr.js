@@ -1,6 +1,6 @@
-import BasePage from '@/components/BasePage'
-import BaseLayout from '@/components/layouts/BaseLayout'
-import { withAuth } from '@/utils/auth0'
+import BasePage from 'components/BasePage'
+import BaseLayout from 'components/layouts/BaseLayout'
+import { withAuth } from 'utils/auth0'
 
 const OnlyAdminSSR = ({ user, title }) => {
   return (

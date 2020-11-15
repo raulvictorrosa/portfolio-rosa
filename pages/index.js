@@ -1,7 +1,7 @@
-import { useGetUser } from '@/actions/user'
+import { useGetUser } from 'actions/user'
+import BaseLayout from 'components/layouts/BaseLayout'
 import Typed from 'react-typed'
 import { Col, Container, Row } from 'reactstrap'
-import BaseLayout from '../components/layouts/BaseLayout'
 
 const ROLES = [
   'Developer',

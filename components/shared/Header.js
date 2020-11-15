@@ -1,4 +1,3 @@
-import { isAuthorized } from '@/utils/auth0'
 import Link from 'next/link'
 import { useState } from 'react'
 import {
@@ -12,6 +11,7 @@ import {
   NavbarToggler,
   NavItem
 } from 'reactstrap'
+import { isAuthorized } from 'utils/auth0'
 
 const BsNavLink = (props) => {
   const { href, title, className = '' } = props

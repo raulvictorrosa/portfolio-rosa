@@ -1,4 +1,4 @@
-import { fetcher } from '@/actions'
+import { fetcher } from 'actions'
 import useSWR from 'swr'
 
 export const useGetUser = (user) => {
