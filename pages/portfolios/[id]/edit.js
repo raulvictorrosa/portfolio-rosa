@@ -4,15 +4,17 @@ import BaseLayout from '@/components/layouts/BaseLayout'
 import PortfolioForm from '@/components/PortfolioForm'
 import withAuth from '@/hoc/withAuth'
 import { useRouter } from 'next/router'
+import { toast } from 'react-toastify'
 import { Col, Row } from 'reactstrap'
 
 const PortfolioEdit = ({ user }) => {
   const router = useRouter()
-  const [updatePortfolio, { data, error, loading }] = useUpdatePortfolio()
+  const [updatePortfolio, { error }] = useUpdatePortfolio()
   const { data: initialData } = useGetPortfolio(router.query.id)
 
-  const _updatePortfolio = (data) => {
-    updatePortfolio(router.query.id, data)
+  const _updatePortfolio = async (data) => {
+    await updatePortfolio(router.query.id, data)
+    toast.success('Portfolio has been updated!', { autoClose: 2000 })
   }
 
   return (
@@ -26,6 +28,7 @@ const PortfolioEdit = ({ user }) => {
                 initialData={initialData}
               />
             )}
+            {error && <div className="alert alert-danger mt-2">{error}</div>}
           </Col>
         </Row>
       </BasePage>
