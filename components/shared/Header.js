@@ -44,7 +44,7 @@ const AdminMenu = () => {
   const [isOpen, setIsOpen] = useState(false)
   return (
     <Dropdown
-      lassName="port-navbar-link  port-dropdown-menu"
+      className="port-navbar-link port-dropdown-menu"
       nav
       isOpen={isOpen}
       toggle={() => setIsOpen(!isOpen)}
@@ -93,7 +93,7 @@ const Header = ({ user, loading, className }) => {
         <BsNavBrand />
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
-          <Nav className="ml-auto" navbar>
+          <Nav className="mr-auto" navbar>
             <NavItem className="port-navbar-item">
               <BsNavLink href="/" title="Home" />
             </NavItem>
