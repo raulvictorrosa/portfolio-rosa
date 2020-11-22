@@ -25,9 +25,13 @@ const BlogEditor = ({ user, loading }) => {
 
   return (
     <BaseLayout user={user} loading={loading}>
-      <BasePage className="blog-editor" title="Blog Editor">
+      <BasePage className="blog-editor">
         {typeof window !== 'undefined' && (
-          <Editor onSave={saveBlog} loading={blogLoading} />
+          <Editor
+            header="Blog Editor"
+            onSave={saveBlog}
+            loading={blogLoading}
+          />
         )}
       </BasePage>
     </BaseLayout>
