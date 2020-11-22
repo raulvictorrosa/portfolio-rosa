@@ -1,6 +1,6 @@
-import { useApiHandler } from 'actions'
+import { fetcher, useApiHandler } from 'actions'
 import axios from 'axios'
-// import useSWR from 'swr'
+import useSWR from 'swr'
 
 const createBlog = (data) => axios.post('/api/v1/blogs', data)
 // const updateBlog = (id, data) =>
@@ -11,11 +11,11 @@ export const useCreateBlog = () => useApiHandler(createBlog)
 // export const useUpdateBlog = () => useApiHandler(updateBlog)
 // export const useDeleteBlog = () => useApiHandler(deleteBlog)
 
-// export const useGetBlog = (id) => {
-//   const { data, error, ...rest } = useSWR(
-//     id ? `/api/v1/blogs/${id}` : null,
-//     fetcher
-//   )
+export const useGetBlog = (id) => {
+  const { data, error, ...rest } = useSWR(
+    id ? `/api/v1/blogs/${id}` : null,
+    fetcher
+  )
 
-//   return { data, error, loading: !data && !error, ...rest }
-// }
+  return { data, error, loading: !data && !error, ...rest }
+}
