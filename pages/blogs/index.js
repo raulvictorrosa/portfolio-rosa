@@ -1,12 +1,14 @@
 import { useGetUser } from 'actions/user'
 import BasePage from 'components/BasePage'
+import BlogItem from 'components/BlogItem'
 import BaseLayout from 'components/layouts/BaseLayout'
 import Masthead from 'components/shared/Masthead'
-import Link from 'next/link'
+import BlogApi from 'lib/api/blogs'
 import { Col, Row } from 'reactstrap'
 
-const Blogs = () => {
+const Blogs = ({ blogs }) => {
   const { data, loading } = useGetUser()
+
   return (
     <BaseLayout
       navClass="transparent"
@@ -20,44 +22,21 @@ const Blogs = () => {
       </Masthead>
       <BasePage className="blog-body">
         <Row>
-          <Col md="10" lg="8" className="mx-auto">
-            <div>
-              <div className="post-preview clickable">
-                <Link href="#">
-                  <a>
-                    <h2 className="post-title">Some Title</h2>
-                    <h3 className="post-subtitle">Some Subtitle</h3>
-                  </a>
-                </Link>
-                <p className="post-meta">
-                  Posted by
-                  <a href="#"> Filip Jerga </a>- 11/11/2011
-                </p>
-              </div>
+          {blogs.map((blog) => (
+            <Col key={blog._id} md="10" lg="8" className="mx-auto">
+              <BlogItem blog={blog} />
               <hr></hr>
-            </div>
-          </Col>
-          <Col md="10" lg="8" className="mx-auto">
-            <div>
-              <div className="post-preview clickable">
-                <Link href="#">
-                  <a>
-                    <h2 className="post-title">Some Title</h2>
-                    <h3 className="post-subtitle">Some Subtitle</h3>
-                  </a>
-                </Link>
-                <p className="post-meta">
-                  Posted by
-                  <a href="#"> Filip Jerga </a>- 11/11/2011
-                </p>
-              </div>
-              <hr></hr>
-            </div>
-          </Col>
+            </Col>
+          ))}
         </Row>
       </BasePage>
     </BaseLayout>
   )
+}
+
+export async function getStaticProps() {
+  const json = await new BlogApi().getAll()
+  return { props: { blogs: json.data }, revalidate: 60 }
 }
 
 export default Blogs
