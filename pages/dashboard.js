@@ -36,7 +36,7 @@ const Dashboard = ({ user, loading }) => {
       {
         key: `${blog._id}-delete`,
         text: 'Delete',
-        handlers: { onClick: () => alert('Clicking delete') }
+        handlers: { onClick: () => changeBlogStatus(blog._id, 'deleted') }
       }
     ]
   }
