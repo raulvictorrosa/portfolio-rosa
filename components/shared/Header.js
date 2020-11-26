@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { useState } from 'react'
+import ReactResizeDetector from 'react-resize-detector'
 import {
   Collapse,
   Dropdown,
@@ -84,32 +85,35 @@ const Header = ({ user, loading, className }) => {
   const toggle = () => setIsOpen(!isOpen)
 
   return (
-    <div>
-      <Navbar
-        className={`port-navbar port-default position-absolute ${className}`}
-        dark
-        expand="md"
-      >
-        <BsNavBrand />
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
-            <NavItem className="port-navbar-item">
-              <BsNavLink href="/" title="Home" />
-            </NavItem>
-            <NavItem className="port-navbar-item">
-              <BsNavLink href="/about" title="About" />
-            </NavItem>
-            <NavItem className="port-navbar-item">
-              <BsNavLink href="/portfolios" title="Portfolio" />
-            </NavItem>
-            <NavItem className="port-navbar-item">
-              <BsNavLink href="/blogs" title="Blogs" />
-            </NavItem>
-            <NavItem className="port-navbar-item">
-              <BsNavLink href="/cv" title="CV" />
-            </NavItem>
-            {/* <NavItem className="port-navbar-item">
+    <ReactResizeDetector handleWidth>
+      {({ width }) => (
+        <Navbar
+          className={`port-navbar port-default position-absolute ${className} ${
+            width < 768 && isOpen ? 'is-open' : 'is-close'
+          }`}
+          dark
+          expand="md"
+        >
+          <BsNavBrand />
+          <NavbarToggler onClick={toggle} />
+          <Collapse isOpen={isOpen} navbar>
+            <Nav className="mr-auto" navbar>
+              <NavItem className="port-navbar-item">
+                <BsNavLink href="/" title="Home" />
+              </NavItem>
+              <NavItem className="port-navbar-item">
+                <BsNavLink href="/about" title="About" />
+              </NavItem>
+              <NavItem className="port-navbar-item">
+                <BsNavLink href="/portfolios" title="Portfolio" />
+              </NavItem>
+              <NavItem className="port-navbar-item">
+                <BsNavLink href="/blogs" title="Blogs" />
+              </NavItem>
+              <NavItem className="port-navbar-item">
+                <BsNavLink href="/cv" title="CV" />
+              </NavItem>
+              {/* <NavItem className="port-navbar-item">
               <BsNavLink href="/secret" title="Secret" />
             </NavItem>
             <NavItem className="port-navbar-item">
@@ -121,29 +125,30 @@ const Header = ({ user, loading, className }) => {
             <NavItem className="port-navbar-item">
               <BsNavLink href="/onlyadminssr" title="AdminSSR" />
             </NavItem> */}
-          </Nav>
-          <Nav navbar>
-            {!loading && (
-              <>
-                {!user && (
-                  <NavItem className="port-navbar-item">
-                    <LoginLink />
-                  </NavItem>
-                )}
-                {user && (
-                  <>
-                    {isAuthorized(user, 'admin') && <AdminMenu />}
+            </Nav>
+            <Nav navbar>
+              {!loading && (
+                <>
+                  {!user && (
                     <NavItem className="port-navbar-item">
-                      <LogoutLink />
+                      <LoginLink />
                     </NavItem>
-                  </>
-                )}
-              </>
-            )}
-          </Nav>
-        </Collapse>
-      </Navbar>
-    </div>
+                  )}
+                  {user && (
+                    <>
+                      {isAuthorized(user, 'admin') && <AdminMenu />}
+                      <NavItem className="port-navbar-item">
+                        <LogoutLink />
+                      </NavItem>
+                    </>
+                  )}
+                </>
+              )}
+            </Nav>
+          </Collapse>
+        </Navbar>
+      )}
+    </ReactResizeDetector>
   )
 }
 
