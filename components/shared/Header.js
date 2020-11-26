@@ -1,3 +1,4 @@
+import ActiveLink from 'components/shared/ActiveLink'
 import Link from 'next/link'
 import { useState } from 'react'
 import ReactResizeDetector from 'react-resize-detector'
@@ -17,9 +18,9 @@ import { isAuthorized } from 'utils/auth0'
 const BsNavLink = (props) => {
   const { href, title, className = '' } = props
   return (
-    <Link href={href}>
+    <ActiveLink activeClassName="active" href={href}>
       <a className={`nav-link port-navbar-link ${className}`}>{title}</a>
-    </Link>
+    </ActiveLink>
   )
 }
 
