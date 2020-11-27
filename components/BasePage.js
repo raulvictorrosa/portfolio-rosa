@@ -47,6 +47,10 @@ const BasePage = (props) => {
             canonicalPath ? canonicalPath : router.asPath
           }`}
         />
+        <link
+          href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700"
+          rel="stylesheet"
+        />
         <link rel="icon" type="image/x-ixon" href="/images/favicon.ico" />
       </Head>
       {indexPage && children}
