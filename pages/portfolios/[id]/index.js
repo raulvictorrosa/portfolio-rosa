@@ -1,6 +1,7 @@
 import { useGetUser } from 'actions/user'
 import BasePage from 'components/BasePage'
 import BaseLayout from 'components/layouts/BaseLayout'
+import { formatDate } from 'helpers/functions'
 import PortfolioApi from 'lib/api/portfolios'
 
 const Portfolio = ({ portfolio }) => {
@@ -15,14 +16,24 @@ const Portfolio = ({ portfolio }) => {
         metaDescription={portfolio.description}
       >
         <div className="portfolio-detail">
-          <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
-            <main role="main" class="inner page-cover">
-              <h1 class="cover-heading">Title</h1>
-              <p class="lead dates">dates</p>
-              <p class="lead info mb-0">jobTitle | company | location</p>
-              <p class="lead">description</p>
-              <p class="lead">
-                <a href="#" class="btn btn-lg btn-secondary">
+          <div className="cover-container d-flex h-100 p-3 mx-auto flex-column">
+            <main role="main" className="inner page-cover">
+              <h1 className="cover-heading">{portfolio.title}</h1>
+              <p className="lead dates">
+                {formatDate(portfolio.startDate)} -
+                {formatDate(portfolio.endDate) || 'Present'}
+              </p>
+              <p className="lead info mb-0">
+                {portfolio.jobTitle} | {portfolio.company} |{' '}
+                {portfolio.location}
+              </p>
+              <p className="lead">{portfolio.description}</p>
+              <p className="lead">
+                <a
+                  href={portfolio.companyWebSite}
+                  target="_blank"
+                  className="btn btn-lg btn-secondary"
+                >
                   Visit Company
                 </a>
               </p>
