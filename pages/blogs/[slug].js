@@ -1,6 +1,7 @@
 import { useGetUser } from 'actions/user'
 import BasePage from 'components/BasePage'
 import BaseLayout from 'components/layouts/BaseLayout'
+import Avatar from 'components/shared/Avatar'
 import BlogApi from 'lib/api/blogs'
 import { Col, Row } from 'reactstrap'
 import { SlateView } from 'slate-simple-editor'
@@ -12,6 +13,12 @@ const BlogDetail = ({ blog, author }) => {
       <BasePage className="slug-container">
         <Row>
           <Col md={{ size: 8, offset: 2 }}>
+            <Avatar
+              image={author.picture}
+              title={author.name}
+              date={blog.createdAt}
+            />
+            <hr />
             <SlateView initialContent={blog.content} />
           </Col>
         </Row>
@@ -21,11 +28,10 @@ const BlogDetail = ({ blog, author }) => {
 }
 
 export async function getStaticPaths() {
-  const json = await new BlogApi().getAll()
-  const blogs = json.data
-  const paths = blogs.map((b) => ({
+  const { data } = await new BlogApi().getAll()
+  const paths = data.map(({ blog }) => ({
     params: {
-      slug: b.slug
+      slug: blog.slug
     }
   }))
   return { paths, fallback: false }
@@ -33,7 +39,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const {
-    data: { blog, user: author }
+    data: { blog, author }
   } = await new BlogApi().getBySlug(params.slug)
   return { props: { blog, author } }
 }
