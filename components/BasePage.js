@@ -47,6 +47,7 @@ const BasePage = (props) => {
             canonicalPath ? canonicalPath : router.asPath
           }`}
         />
+        <link rel="icon" type="image/x-ixon" href="/images/favicon.ico" />
       </Head>
       {indexPage && children}
       {!indexPage && (
