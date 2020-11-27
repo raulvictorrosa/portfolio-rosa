@@ -33,6 +33,17 @@ body {
 //   color: red;
 // }
 
+.avatar-box {
+  img {
+    height: 50px;
+    border-radius: 50%;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+}
+
 .base-page {
   padding: 150px 0;
   color: black;
