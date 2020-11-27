@@ -4,7 +4,7 @@ import { Col, Row } from 'reactstrap'
 
 const Cv = () => (
   <BaseLayout>
-    <BasePage>
+    <BasePage metaTitle="My experiences - Raul Rosa">
       <Row>
         <Col md={{ size: 8, offset: 2 }}>
           <iframe

@@ -23,7 +23,7 @@ const About = () => {
 
   return (
     <BaseLayout user={data} loading={loading}>
-      <BasePage className="about-page">
+      <BasePage className="about-page" metaTitle="About Me - Raul Rosa">
         <Row className="mt-5">
           <Col md="6">
             <div className="left-side">
@@ -39,7 +39,7 @@ const About = () => {
           <Col md="6">
             <div className={`${createFadeInClass()}`}>
               <p>
-                My name is Filip Jerga and I am an experienced software engineer
+                My name is Raul Rosa and I am an experienced software engineer
                 and freelance developer.{' '}
               </p>
               <p>
