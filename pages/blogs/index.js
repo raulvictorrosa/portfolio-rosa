@@ -35,8 +35,9 @@ const Blogs = ({ blogs }) => {
 }
 
 export async function getStaticProps() {
-  const json = await new BlogApi().getAll()
-  return { props: { blogs: json.data }, revalidate: 60 }
+  const { data } = await new BlogApi().getAll()
+  const blogs = data.map((item) => ({ ...item.blog, author: item.author }))
+  return { props: { blogs }, revalidate: 60 }
 }
 
 export default Blogs
