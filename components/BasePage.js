@@ -2,9 +2,16 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { Container } from 'reactstrap'
 
+const PageHeader = ({ title }) => (
+  <div className="page-header">
+    <h1 className="page-header-title">{title}</h1>
+  </div>
+)
+
 const BasePage = (props) => {
   const router = useRouter()
   const {
+    noWrapper,
     indexPage,
     className,
     title,
@@ -53,19 +60,20 @@ const BasePage = (props) => {
         />
         <link rel="icon" type="image/x-ixon" href="/images/favicon.ico" />
       </Head>
-      {indexPage && children}
-      {!indexPage && (
-        <div className={`${pageType} ${className}`}>
+      <div className={`${pageType} ${className}`}>
+        {noWrapper && (
+          <>
+            {title && <PageHeader title={title} />}
+            {children}
+          </>
+        )}
+        {!noWrapper && (
           <Container>
-            {title && (
-              <div className="page-header">
-                <h1 className="page-header-title">{title}</h1>
-              </div>
-            )}
+            {title && <PageHeader title={title} />}
             {children}
           </Container>
-        </div>
-      )}
+        )}
+      </div>
     </>
   )
 }
