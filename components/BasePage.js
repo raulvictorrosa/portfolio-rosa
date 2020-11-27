@@ -48,7 +48,7 @@ const BasePage = (props) => {
           }`}
         />
         <link
-          href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700"
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap"
           rel="stylesheet"
         />
         <link rel="icon" type="image/x-ixon" href="/images/favicon.ico" />
