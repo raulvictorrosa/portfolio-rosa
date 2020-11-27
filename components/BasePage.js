@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import React from 'react'
 import { Container } from 'reactstrap'
 
 const PageHeader = ({ title }) => (
@@ -22,6 +23,7 @@ const BasePage = (props) => {
   } = props
 
   const pageType = indexPage ? 'index-page' : 'base-page'
+  const Wrapper = noWrapper ? React.Fragment : Container
 
   return (
     <>
@@ -61,18 +63,10 @@ const BasePage = (props) => {
         <link rel="icon" type="image/x-ixon" href="/images/favicon.ico" />
       </Head>
       <div className={`${pageType} ${className}`}>
-        {noWrapper && (
-          <>
-            {title && <PageHeader title={title} />}
-            {children}
-          </>
-        )}
-        {!noWrapper && (
-          <Container>
-            {title && <PageHeader title={title} />}
-            {children}
-          </Container>
-        )}
+        <Wrapper>
+          {title && <PageHeader title={title} />}
+          {children}
+        </Wrapper>
       </div>
     </>
   )
