@@ -3,11 +3,18 @@ import BasePage from 'components/BasePage'
 import BaseLayout from 'components/layouts/BaseLayout'
 import Avatar from 'components/shared/Avatar'
 import BlogApi from 'lib/api/blogs'
+import { useRouter } from 'next/router'
 import { Col, Row } from 'reactstrap'
 import { SlateView } from 'slate-simple-editor'
 
 const BlogDetail = ({ blog, author }) => {
   const { data, loading } = useGetUser()
+  const router = useRouter()
+
+  if (router.isFallback) {
+    return <h1>Your page is getting served...</h1>
+  }
+
   return (
     <BaseLayout user={data} loading={loading}>
       <BasePage
@@ -17,13 +24,18 @@ const BlogDetail = ({ blog, author }) => {
       >
         <Row>
           <Col md={{ size: 8, offset: 2 }}>
-            <Avatar
-              image={author.picture}
-              title={author.name}
-              date={blog.createdAt}
-            />
-            <hr />
-            <SlateView initialContent={blog.content} />
+            {router.isFallback && <h1>Your page is getting served...</h1>}
+            {!router.isFallback && (
+              <>
+                <Avatar
+                  image={author.picture}
+                  title={author.name}
+                  date={blog.createdAt}
+                />
+                <hr />
+                <SlateView initialContent={blog.content} />
+              </>
+            )}
           </Col>
         </Row>
       </BasePage>
