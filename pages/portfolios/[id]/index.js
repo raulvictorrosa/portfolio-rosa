@@ -64,7 +64,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const json = await new PortfolioApi().getById(params.id)
   const portfolio = json.data
-  return { props: { portfolio } }
+  return { props: { portfolio }, revalidate: 1 }
 }
 
 export default Portfolio
