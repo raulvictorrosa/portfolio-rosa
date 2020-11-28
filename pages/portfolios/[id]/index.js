@@ -9,6 +9,10 @@ const Portfolio = ({ portfolio }) => {
   const { data: dataU, loading: loadingU } = useGetUser()
   const router = useRouter()
 
+  if (router.isFallback) {
+    return <h1>Your page is getting server</h1>
+  }
+
   return (
     <BaseLayout user={dataU} loading={loadingU} navClass="transparent">
       <BasePage
